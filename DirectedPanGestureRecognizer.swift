@@ -10,7 +10,7 @@ import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
 /// Extension of `UIGestureRecognizerDelegate` which allows the delegate to receive messages when the pan gesture recognizer starts, updates, cancels, and finishes. The `delegate` property can be set to a class implementing `DirectedPanGestureRecognizerDelegate` and it will receive these messages.
-protocol DirectedPanGestureRecognizerDelegate: UIGestureRecognizerDelegate {
+public protocol DirectedPanGestureRecognizerDelegate: UIGestureRecognizerDelegate {
     
     /// Called when the pan gesture recognizer starts.
     func directedPanGestureRecognizer(didStart gestureRecognizer: DirectedPanGestureRecognizer)
