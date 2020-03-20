@@ -10,19 +10,19 @@ import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
 /// Extension of `UIGestureRecognizerDelegate` which allows the delegate to receive messages when the pan gesture recognizer starts, updates, cancels, and finishes. The `delegate` property can be set to a class implementing `DirectedPanGestureRecognizerDelegate` and it will receive these messages.
-@objc public protocol DirectedPanGestureRecognizerDelegate: UIGestureRecognizerDelegate {
+protocol DirectedPanGestureRecognizerDelegate: UIGestureRecognizerDelegate {
     
     /// Called when the pan gesture recognizer starts.
-    @objc optional func directedPanGestureRecognizer(didStart gestureRecognizer: DirectedPanGestureRecognizer)
+    func directedPanGestureRecognizer(didStart gestureRecognizer: DirectedPanGestureRecognizer)
     
     /// Called when the pan gesture recognizer updates.
-    @objc optional func directedPanGestureRecognizer(didUpdate gestureRecognizer: DirectedPanGestureRecognizer)
+    func directedPanGestureRecognizer(didUpdate gestureRecognizer: DirectedPanGestureRecognizer)
     
     /// Called when the pan gesture recognizer cancels. A pan gesture recognizer may cancel if its translation or velocity in `initialDirection` is less than the value of `minimumTranslation` or `minimumVelocity`, respectively.
-    @objc optional func directedPanGestureRecognizer(didCancel gestureRecognizer: DirectedPanGestureRecognizer)
+    func directedPanGestureRecognizer(didCancel gestureRecognizer: DirectedPanGestureRecognizer)
     
     /// Called when the pan gesture recognizer finishes. A pan gesture recognizer may finish if its translation and velocity in `initialDirection` are greater than or equal to the value of `minimumTranslation` or `minimumVelocity`, respectively.
-    @objc optional func directedPanGestureRecognizer(didFinish gestureRecognizer: DirectedPanGestureRecognizer)
+    func directedPanGestureRecognizer(didFinish gestureRecognizer: DirectedPanGestureRecognizer)
     
 }
 
@@ -92,15 +92,15 @@ open class DirectedPanGestureRecognizer: UIPanGestureRecognizer {
     
         switch state {
         case .began:
-            directedPanDelegate?.directedPanGestureRecognizer?(didStart: self)
+            directedPanDelegate?.directedPanGestureRecognizer(didStart: self)
         case .changed:
-            directedPanDelegate?.directedPanGestureRecognizer?(didUpdate: self)
+            directedPanDelegate?.directedPanGestureRecognizer(didUpdate: self)
         case .cancelled:
-            directedPanDelegate?.directedPanGestureRecognizer?(didCancel: self)
+            directedPanDelegate?.directedPanGestureRecognizer(didCancel: self)
         case .ended where shouldCancel():
-            directedPanDelegate?.directedPanGestureRecognizer?(didCancel: self)
+            directedPanDelegate?.directedPanGestureRecognizer(didCancel: self)
         case .ended:
-            directedPanDelegate?.directedPanGestureRecognizer?(didFinish: self)
+            directedPanDelegate?.directedPanGestureRecognizer(didFinish: self)
         default:
             break
         }
